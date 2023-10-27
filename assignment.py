@@ -9,40 +9,40 @@ with open('embeddings/data.pkl', 'rb') as f:
 embedded_words = embedding_data['w']
 embedding_data = embedding_data['E']
 
-# w2v = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz', binary=True)
+w2v = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz', binary=True)
 
-# m1_matrix = m1(w)
-# m1_plus_matrix = m1_plus(w)
-# m2_10 = m2(m1_plus_matrix, 10)
-# m2_100 = m2(m1_plus_matrix, 100)
-# m2_300 = m2(m1_plus_matrix, 300)
-# rg = RG65.to_numpy()
+m1_matrix = m1(w)
+m1_plus_matrix = m1_plus(w)
+m2_10 = m2(m1_plus_matrix, 10)
+m2_100 = m2(m1_plus_matrix, 100)
+m2_300 = m2(m1_plus_matrix, 300)
+rg = RG65.to_numpy()
 
-# m1_sim = []
-# m1_plus_sim = []
-# m2_10_sim = []
-# m2_100_sim = []
-# m2_300_sim = []
-# word_2_vec_sim = []
+m1_sim = []
+m1_plus_sim = []
+m2_10_sim = []
+m2_100_sim = []
+m2_300_sim = []
+word_2_vec_sim = []
 
-# for row in rg:
-#     word0 = w.index(row[0])
-#     word1 = w.index(row[1])
-#     m1_sim.append(cosine_dist(m1_matrix[word0], m1_matrix[word1]))
-#     m1_plus_sim.append(cosine_dist(m1_plus_matrix[word0], m1_plus_matrix[word1]))
-#     m2_10_sim.append(cosine_dist(m2_10[word0], m2_10[word1]))
-#     m2_100_sim.append(cosine_dist(m2_100[word0], m2_100[word1]))
-#     m2_300_sim.append(cosine_dist(m2_300[word0], m2_300[word1]))
-#     word_2_vec_sim.append(cosine_dist(w2v[word0], w2v[word1]))
+for row in rg:
+    word0 = w.index(row[0])
+    word1 = w.index(row[1])
+    m1_sim.append(cosine_dist(m1_matrix[word0], m1_matrix[word1]))
+    m1_plus_sim.append(cosine_dist(m1_plus_matrix[word0], m1_plus_matrix[word1]))
+    m2_10_sim.append(cosine_dist(m2_10[word0], m2_10[word1]))
+    m2_100_sim.append(cosine_dist(m2_100[word0], m2_100[word1]))
+    m2_300_sim.append(cosine_dist(m2_300[word0], m2_300[word1]))
+    word_2_vec_sim.append(cosine_dist(w2v[word0], w2v[word1]))
 
-# print('=================RG65 Tests=====================')
-# print('Pearson correlation for M1: ', pearsonr(m1_sim, rg[:, 2]))
-# print('Pearson correlation for M1+: ', pearsonr(m1_plus_sim, rg[:, 2]))
-# print('Pearson correlation for M2_10: ', pearsonr(m2_10_sim, rg[:, 2]))
-# print('Pearson correlation for M2_100: ', pearsonr(m2_100_sim, rg[:, 2]))
-# print('Pearson correlation for M2_300: ', pearsonr(m2_300_sim, rg[:, 2]))
-# print('Pearson correlation for W2V: ', pearsonr(word_2_vec_sim, rg[:, 2]))
-# print()
+print('=================RG65 Tests=====================')
+print('Pearson correlation for M1: ', pearsonr(m1_sim, rg[:, 2]))
+print('Pearson correlation for M1+: ', pearsonr(m1_plus_sim, rg[:, 2]))
+print('Pearson correlation for M2_10: ', pearsonr(m2_10_sim, rg[:, 2]))
+print('Pearson correlation for M2_100: ', pearsonr(m2_100_sim, rg[:, 2]))
+print('Pearson correlation for M2_300: ', pearsonr(m2_300_sim, rg[:, 2]))
+print('Pearson correlation for W2V: ', pearsonr(word_2_vec_sim, rg[:, 2]))
+print()
 
 
 def analogy_test(model, word0, word1, word2):
@@ -84,21 +84,21 @@ def sim(word0, word1, word2, word3):
 analogy_dataset = pd.read_csv('analogy.csv').to_numpy()
 subset = [item for item in analogy_dataset if all([word in w for word in item])]
 
-# print('=================Analogy Tests=====================')
-# count = [0, 0]
-# for row in tqdm(subset):
-#     word0 = row[0]
-#     word1 = row[1]
-#     word2 = row[2]
-#     word3 = row[3]
-#     w2v_analogy = analogy_test(w2v, word0, word1, word2)
-#     m2_analogy = analogy_test(m2_300, word0, word1, word2)
-#     # print(m2_analogy, word3)
-#     count[0] += m2_analogy == word3
-#     count[1] += w2v_analogy == word3
-# print('M2_300 Accuracy: ', count[0] / len(subset))
-# print('W2V_300 Accuracy: ', count[1] / len(subset))
-# print()
+print('=================Analogy Tests=====================')
+count = [0, 0]
+for row in tqdm(subset):
+    word0 = row[0]
+    word1 = row[1]
+    word2 = row[2]
+    word3 = row[3]
+    w2v_analogy = analogy_test(w2v, word0, word1, word2)
+    m2_analogy = analogy_test(m2_300, word0, word1, word2)
+    # print(m2_analogy, word3)
+    count[0] += m2_analogy == word3
+    count[1] += w2v_analogy == word3
+print('M2_300 Accuracy: ', count[0] / len(subset))
+print('W2V_300 Accuracy: ', count[1] / len(subset))
+print()
 
 
 print('=================Diachronic LSC=====================')
@@ -161,7 +161,7 @@ def visualize(words, w, E):
         plt.text(x[-1], y[-1], 'e')
     print('displaying')
     plt.legend()
-    plt.savefig('visualize.png', dpi=100)
+    plt.savefig('semantic_change_figure.png', dpi=100)
 
 dists = find_changes(embedding_data, 0, 9)
 

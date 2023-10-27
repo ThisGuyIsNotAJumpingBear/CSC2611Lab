@@ -1,0 +1,31 @@
+The length of W is:  5031
+=================RG65 Tests=====================
+Pearson correlation for M1:  PearsonRResult(statistic=0.1756896379226664, pvalue=0.1615472512985823)
+Pearson correlation for M1+:  PearsonRResult(statistic=0.2615179404274942, pvalue=0.035353430865724206)
+Pearson correlation for M2_10:  PearsonRResult(statistic=0.22189957789507747, pvalue=0.07564739629582959)
+Pearson correlation for M2_100:  PearsonRResult(statistic=0.31010441522636667, pvalue=0.011939108893886987)
+Pearson correlation for M2_300:  PearsonRResult(statistic=0.2689518682264198, pvalue=0.03028255566078279)
+Pearson correlation for W2V:  PearsonRResult(statistic=-0.11627382691782638, pvalue=0.3563334722315968)
+
+=================Analogy Tests=====================
+M2_300 Accuracy:  0.014399205561072492
+W2V_300 Accuracy:  0.25173783515392256
+
+=================Diachronic LSC=====================
+top 20:  ['film', 'shift', 'berkeley', 'patterns', 'perspective', 'impact', 'media', 'shri', 'van', 'approach', 'goals', 'sector', 'radio', 'computer', 'objectives', 'programs', 'techniques', 'ml', 'skills', 'mcgraw']
+bot 20:  ['april', 'june', 'november', 'february', 'years', 'october', 'increase', 'january', 'century', 'months', 'daughter', 'december', 'god', 'september', 'feet', 'week', 'evening', 'door', 'payment', 'miles']
+
+top 20:  ['therapy', 'challenge', 'stanford', 'assessment', 'film', 'shift', 'berkeley', 'patterns', 'perspective', 'impact', 'media', 'shri', 'van', 'approach', 'goals', 'sector', 'radio', 'computer', 'objectives', 'programs']
+bot 20:  ['april', 'june', 'november', 'february', 'years', 'october', 'increase', 'january', 'century', 'months', 'daughter', 'december', 'god', 'september', 'feet', 'week', 'evening', 'door', 'payment', 'miles']
+
+top 20:  ['vision', 'wing', 'depth', 'pupils', 'institution', 'affairs', 'visit', 'gospel', 'holland', 'sequence', 'minute', 'certificate', 'attempts', 'factors', 'conquest', 'circulation', 'survival', 'costs', 'idea', 'police']
+bot 20:  ['rest', 'service', 'estimates', 'clergy', 'survey', 'length', 'ownership', 'victory', 'millions', 'royal', 'fruit', 'husband', 'eggs', 'engineering', 'pieces', 'enemies', 'eve', 'favor', 'others', 'name']
+
+[[ 1.          0.96598532 -0.00375411]
+ [ 0.96598532  1.         -0.00271577]
+ [-0.00375411 -0.00271577  1.        ]]
+
+Consistency:
+0.06534495199638299
+0.06878286969775024
+11439.21193868394
